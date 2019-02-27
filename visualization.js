@@ -30,7 +30,7 @@ context.strokeText(text, 0, 30);
 let texture = new THREE.Texture(canvas);
 texture.needsUpdate = true;
 
-let geometry = new THREE.BoxGeometry(2, 1, 0.2);
+let geometry = new THREE.BoxGeometry(1, 1, 1);
 let material = new THREE.MeshBasicMaterial({map: texture});
 
 let node = new THREE.Mesh(geometry, material);
