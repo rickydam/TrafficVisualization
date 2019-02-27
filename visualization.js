@@ -15,7 +15,7 @@ canvas.width = 100;
 canvas.height = 100;
 
 let context = canvas.getContext('2d');
-context.font = '30px Arial';
+context.font = '20px Arial';
 
 context.beginPath();
 context.rect(0, 0, 100, 100);
@@ -23,9 +23,9 @@ context.fillStyle = 'gray';
 context.fill();
 
 context.fillStyle = 'white';
-context.fillText(text, 0, 30);
+context.fillText(text, 0, 20);
 context.strokeStyle = 'white';
-context.strokeText(text, 0, 30);
+context.strokeText(text, 0, 20);
 
 let texture = new THREE.Texture(canvas);
 texture.needsUpdate = true;
