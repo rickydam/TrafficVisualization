@@ -11,14 +11,14 @@ document.body.appendChild(renderer.domElement);
 
 let text = 'Hello world!';
 let canvas = document.createElement('canvas');
-canvas.width = 200;
+canvas.width = 100;
 canvas.height = 100;
 
 let context = canvas.getContext('2d');
 context.font = '30px Arial';
 
 context.beginPath();
-context.rect(0, 0, 200, 100);
+context.rect(0, 0, 100, 100);
 context.fillStyle = 'gray';
 context.fill();
 
