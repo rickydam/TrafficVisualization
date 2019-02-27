@@ -10,10 +10,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 let text = 'Hello world!';
-let canvas = document.createElement('canvas');
-canvas.width = 100;
-canvas.height = 100;
-
+let canvas = createCanvasHD(100, 100);
 let context = canvas.getContext('2d');
 context.font = '20px Arial';
 
@@ -38,3 +35,14 @@ scene.add(node);
 
 camera.position.z = 5;
 renderer.render(scene, camera);
+
+function createCanvasHD(width, height) {
+    let dpr = window.devicePixelRatio;
+    let bspr = 1;
+    let ratio = dpr / bspr;
+    let canvas = document.createElement('canvas');
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    canvas.getContext('2d').setTransform(ratio, 0, 0, ratio, 0, 0);
+    return canvas;
+}
