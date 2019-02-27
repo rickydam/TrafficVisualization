@@ -9,11 +9,32 @@ let renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-let geometry = new THREE.BoxGeometry(2, 1, 0.2);
+let text = 'Hello world!';
+let canvas = document.createElement('canvas');
+canvas.width = 200;
+canvas.height = 100;
 
-let material = new THREE.MeshBasicMaterial({color: 0x9C9C9C});
+let context = canvas.getContext('2d');
+context.font = '30px Arial';
+
+context.beginPath();
+context.rect(0, 0, 200, 100);
+context.fillStyle = 'gray';
+context.fill();
+
+context.fillStyle = 'white';
+context.fillText(text, 0, 30);
+context.strokeStyle = 'white';
+context.strokeText(text, 0, 30);
+
+let texture = new THREE.Texture(canvas);
+texture.needsUpdate = true;
+
+let geometry = new THREE.BoxGeometry(2, 1, 0.2);
+let material = new THREE.MeshBasicMaterial({map: texture});
+
 let node = new THREE.Mesh(geometry, material);
 scene.add(node);
-camera.position.z = 5;
 
+camera.position.z = 5;
 renderer.render(scene, camera);
