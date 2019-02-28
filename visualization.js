@@ -54,7 +54,8 @@ function addNode() {
 
 function getCamera() {
     let fov = 75;
-
+    let innerWidth = window.innerWidth;
+    let innerHeight = window.innerHeight;
     let aspectRatio = innerWidth/innerHeight;
     let near = 0.1;
     let far = 1000;
