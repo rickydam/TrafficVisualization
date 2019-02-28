@@ -75,9 +75,24 @@ function getRenderer() {
     return renderer;
 }
 
+let loadJSON = (callback) => {
+    let xobj = new XMLHttpRequest();
+    xobj.overrideMimeType('application/json');
+    xobj.open('GET', 'sample_pcap.json', true);
+    xobj.onreadystatechange = function() {
+        if (xobj.readyState === 4 && xobj.status == "200") {
+            callback(xobj.responseText);
+        }
+    };
+    xobj.send(null);
+};
+
 let scene = new THREE.Scene();
 let camera = getCamera();
 let renderer = getRenderer();
 let controls = getControls(camera, renderer);
+loadJSON(function(response) {
+    console.log(response);
+});
 addNode();
 animate();
