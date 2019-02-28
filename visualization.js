@@ -1,29 +1,3 @@
-function loadVisualization() {
-    // To actually be able to display anything with three.js
-    // We need three things: scene, camera, and renderer
-
-    let scene = new THREE.Scene();
-    // Params: field of view, aspect ratio, near, far
-    let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-
-    let renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    let canvas = createCanvas();
-    let texture = new THREE.Texture(canvas);
-    texture.needsUpdate = true;
-
-    let geometry = new THREE.BoxGeometry(1, 1, 1);
-    let material = new THREE.MeshBasicMaterial({map: texture});
-
-    let node = new THREE.Mesh(geometry, material);
-    scene.add(node);
-
-    camera.position.z = 5;
-    renderer.render(scene, camera);
-}
-
 function createCanvas() {
     let text = 'Hello world!';
     let canvas = createHDCanvas(100, 100);
@@ -52,3 +26,44 @@ function createHDCanvas(width, height) {
     canvas.getContext('2d').setTransform(ratio, 0, 0, ratio, 0, 0);
     return canvas;
 }
+
+function addNode() {
+    let canvas = createCanvas();
+    let texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+
+    let geometry = new THREE.BoxGeometry(1, 1, 1);
+    let material = new THREE.MeshBasicMaterial({map: texture});
+
+    let node = new THREE.Mesh(geometry, material);
+    scene.add(node);
+
+    renderer.render(scene, camera);
+}
+
+function getCamera() {
+    let fov = 75;
+
+    let aspectRatio = innerWidth/innerHeight;
+    let near = 0.1;
+    let far = 1000;
+
+    let camera = new THREE.PerspectiveCamera(fov, aspectRatio, near, far);
+    camera.position.z = 5;
+    return camera;
+}
+
+function getRenderer() {
+    let innerWidth = window.innerWidth;
+    let innerHeight = window.innerHeight;
+
+    let renderer = new THREE.WebGLRenderer();
+    renderer.setSize(innerWidth, innerHeight);
+    document.body.appendChild(renderer.domElement);
+    return renderer;
+}
+
+let scene = new THREE.Scene();
+let camera = getCamera();
+let renderer = getRenderer();
+addNode();
