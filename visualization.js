@@ -27,6 +27,19 @@ function createHDCanvas(width, height) {
     return canvas;
 }
 
+function getControls(camera, renderer) {
+    let controls = new THREE.TrackballControls(camera, renderer.domElement);
+    controls.zoomSpeed = 0.4;
+    controls.panSpeed = 0.4;
+    return controls;
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+    controls.update();
+}
+
 function addNode() {
     let canvas = createCanvas();
     let texture = new THREE.Texture(canvas);
@@ -37,8 +50,6 @@ function addNode() {
 
     let node = new THREE.Mesh(geometry, material);
     scene.add(node);
-
-    renderer.render(scene, camera);
 }
 
 function getCamera() {
@@ -66,4 +77,6 @@ function getRenderer() {
 let scene = new THREE.Scene();
 let camera = getCamera();
 let renderer = getRenderer();
+let controls = getControls(camera, renderer);
 addNode();
+animate();
