@@ -1,8 +1,7 @@
-function createCanvas() {
-    let text = 'Hello world!';
+function createCanvas(number, time, source, destination, protocol, length) {
     let canvas = createHDCanvas(256, 256);
     let context = canvas.getContext('2d');
-    context.font = '20px Arial';
+    context.font = '18px Arial';
 
     context.beginPath();
     context.rect(0, 0, 256, 256);
@@ -10,9 +9,35 @@ function createCanvas() {
     context.fill();
 
     context.fillStyle = 'white';
-    context.fillText(text, 0, 20);
+    context.fillText("Number: " + number, 5, 20);
     context.strokeStyle = 'white';
-    context.strokeText(text, 0, 20);
+    context.strokeText("Number: " + number, 5, 20);
+
+    context.fillStyle = 'white';
+    context.fillText("Time: " + time, 5, 45);
+    context.strokeStyle = 'white';
+    context.strokeText("Time: " + time, 5, 45);
+
+    context.fillStyle = 'white';
+    context.fillText("Source: " + source, 5, 70);
+    context.strokeStyle = 'white';
+    context.strokeText("Source: " + source, 5, 70);
+
+    context.fillStyle = 'white';
+    context.fillText("Destination: " + destination, 5, 95);
+    context.strokeStyle = 'white';
+    context.strokeText("Destination: " + destination, 5, 95);
+
+    context.fillStyle = 'white';
+    context.fillText("Protocol: " + protocol, 5, 120);
+    context.strokeStyle = 'white';
+    context.strokeText("Protocol: " + protocol, 5, 120);
+
+    context.fillStyle = 'white';
+    context.fillText("Length: " + length, 5, 145);
+    context.strokeStyle = 'white';
+    context.strokeText("Length: " + length, 5, 145);
+
     return canvas;
 }
 
@@ -40,8 +65,8 @@ function animate() {
     controls.update();
 }
 
-function addNode() {
-    let canvas = createCanvas();
+function addNode(number, time, source, destination, protocol, length) {
+    let canvas = createCanvas(number, time, source, destination, protocol, length);
     let texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
 
@@ -91,8 +116,20 @@ let scene = new THREE.Scene();
 let camera = getCamera();
 let renderer = getRenderer();
 let controls = getControls(camera, renderer);
+
 loadJSON(function(response) {
-    console.log(response);
+    let jsonData = JSON.parse(response);
+    for(let i=0; i<jsonData.length; i++) {
+        let obj = jsonData[i];
+        addNode(
+            obj["No."],
+            obj["Time"],
+            obj["Source"],
+            obj["Destination"],
+            obj["Protocol"],
+            obj["Length"]
+        );
+    }
 });
-addNode();
+
 animate();
