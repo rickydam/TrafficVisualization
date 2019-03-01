@@ -74,6 +74,9 @@ function addNode(number, time, source, destination, protocol, length) {
     let material = new THREE.MeshBasicMaterial({map: texture});
 
     let node = new THREE.Mesh(geometry, material);
+    node.position.x = (Math.random() - 0.5) * 20;
+    node.position.y = (Math.random() - 0.5) * 20;
+    node.position.z = (Math.random() - 0.5) * 20;
     scene.add(node);
 }
 
