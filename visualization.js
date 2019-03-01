@@ -1,11 +1,11 @@
 function createCanvas() {
     let text = 'Hello world!';
-    let canvas = createHDCanvas(100, 100);
+    let canvas = createHDCanvas(256, 256);
     let context = canvas.getContext('2d');
     context.font = '20px Arial';
 
     context.beginPath();
-    context.rect(0, 0, 100, 100);
+    context.rect(0, 0, 256, 256);
     context.fillStyle = 'gray';
     context.fill();
 
