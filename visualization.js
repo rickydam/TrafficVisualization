@@ -89,7 +89,7 @@ function getCamera() {
     let far = 1000;
 
     let camera = new THREE.PerspectiveCamera(fov, aspectRatio, near, far);
-    camera.position.z = 5;
+    camera.position.z = 20;
     return camera;
 }
 
