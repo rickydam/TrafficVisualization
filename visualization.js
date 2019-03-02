@@ -1,13 +1,16 @@
 let nodes = [];
 
-function storeNode(number, time, source, destination, protocol, length) {
+function storeNode(number, time, source, destination, protocol, length, xCoordinates, yCoordinates, zCoordinates) {
     let node = {
         number: number,
         time: time,
         source: source,
         destination: destination,
         protocol: protocol,
-        length: length
+        length: length,
+        xCoordinates: xCoordinates,
+        yCoordinates: yCoordinates,
+        zCoordinates: zCoordinates
     };
     nodes.push(node);
 }
@@ -80,7 +83,6 @@ function animate() {
 }
 
 function addCube(number, time, source, destination, protocol, length) {
-    storeNode(number, time, source, destination, protocol, length);
     let canvas = createCanvas(number, time, source, destination, protocol, length);
     let texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
@@ -89,9 +91,14 @@ function addCube(number, time, source, destination, protocol, length) {
     let material = new THREE.MeshBasicMaterial({map: texture});
 
     let cube = new THREE.Mesh(geometry, material);
-    cube.position.x = (Math.random() - 0.5) * 20;
-    cube.position.y = (Math.random() - 0.5) * 20;
-    cube.position.z = (Math.random() - 0.5) * 20;
+    let xCoordinates = (Math.random() - 0.5) * 20;
+    let yCoordinates = (Math.random() - 0.5) * 20;
+    let zCoordinates = (Math.random() - 0.5) * 20;
+    cube.position.x = xCoordinates;
+    cube.position.y = yCoordinates;
+    cube.position.z = zCoordinates;
+    storeNode(number, time, source, destination, protocol, length, xCoordinates, yCoordinates, zCoordinates);
+
     scene.add(cube);
 }
 
