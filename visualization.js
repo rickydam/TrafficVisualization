@@ -65,7 +65,7 @@ function animate() {
     controls.update();
 }
 
-function addNode(number, time, source, destination, protocol, length) {
+function addCube(number, time, source, destination, protocol, length) {
     let canvas = createCanvas(number, time, source, destination, protocol, length);
     let texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
@@ -73,11 +73,11 @@ function addNode(number, time, source, destination, protocol, length) {
     let geometry = new THREE.BoxGeometry(1, 1, 1);
     let material = new THREE.MeshBasicMaterial({map: texture});
 
-    let node = new THREE.Mesh(geometry, material);
-    node.position.x = (Math.random() - 0.5) * 20;
-    node.position.y = (Math.random() - 0.5) * 20;
-    node.position.z = (Math.random() - 0.5) * 20;
-    scene.add(node);
+    let cube = new THREE.Mesh(geometry, material);
+    cube.position.x = (Math.random() - 0.5) * 20;
+    cube.position.y = (Math.random() - 0.5) * 20;
+    cube.position.z = (Math.random() - 0.5) * 20;
+    scene.add(cube);
 }
 
 function getCamera() {
@@ -124,7 +124,7 @@ loadJSON(function(response) {
     let jsonData = JSON.parse(response);
     for(let i=0; i<jsonData.length; i++) {
         let obj = jsonData[i];
-        addNode(
+        addCube(
             obj["No."],
             obj["Time"],
             obj["Source"],
