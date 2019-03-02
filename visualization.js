@@ -1,3 +1,17 @@
+let nodes = [];
+
+function storeNode(number, time, source, destination, protocol, length) {
+    let node = {
+        number: number,
+        time: time,
+        source: source,
+        destination: destination,
+        protocol: protocol,
+        length: length
+    };
+    nodes.push(node);
+}
+
 function createCanvas(number, time, source, destination, protocol, length) {
     let canvas = createHDCanvas(256, 256);
     let context = canvas.getContext('2d');
@@ -66,6 +80,7 @@ function animate() {
 }
 
 function addCube(number, time, source, destination, protocol, length) {
+    storeNode(number, time, source, destination, protocol, length);
     let canvas = createCanvas(number, time, source, destination, protocol, length);
     let texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
