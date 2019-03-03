@@ -16,6 +16,9 @@ CybernetIQ's second challenge: Packet traffic visualization using three.js <br>
 8. Loaded the local JSON file using a function with a callback since it is done asynchronously
 9. Looped through the JSON data to dynamically create the nodes
 10. Used the random function of the built-in Math library to generate random coordinate values to spread out the nodes
+11. Stored all the JSON data in a global variable as node objects to reference later
+12. Also stored the randomly generated x, y, and z coordinates into the node objects to use when drawing the relationships
+13. Added a function to draw the relationships using vertices at the cube coordinates of the source packet and the destination packets
 
 # Challenges
 * Scene not rendering when inside a function
@@ -25,6 +28,9 @@ CybernetIQ's second challenge: Packet traffic visualization using three.js <br>
 # Problems
 * Overlap of nodes
   * Since the x, y, and z coordinates are generated from -10 to +20, it is possible that some cubes may overlap
+* Packet relationships
+  * All lines are currently only of color white
+  * Current implementation will only work for a single sender and a single receiver
 
 # Libraries Used
 * three.js
