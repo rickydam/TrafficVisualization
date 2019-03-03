@@ -15,6 +15,47 @@ function storeNode(number, time, source, destination, protocol, length, xCoordin
     nodes.push(node);
 }
 
+function drawRelationships() {
+    let source = nodes[0].source;
+    let sentPackets = [];
+
+    for(let i=0; i<nodes.length; i++) {
+        if(source === nodes[i].source) {
+            // Packet sent
+            sentPackets.push(i);
+        }
+        else if(source === nodes[i].destination) {
+            // Packet received
+            let destinationPacket = nodes[i];
+            let sentPacketsCount = sentPackets.length;
+            for(let j=0; j<sentPacketsCount; j++) {
+                let packetNumber = sentPackets.pop();
+                let sourcePacket = nodes[packetNumber];
+
+                let lineMaterial = new THREE.LineBasicMaterial();
+                let lineGeometry = new THREE.Geometry();
+                lineGeometry.vertices.push(new THREE.Vector3(
+                    sourcePacket.xCoordinates,
+                    sourcePacket.yCoordinates,
+                    sourcePacket.zCoordinates
+                ));
+                lineGeometry.vertices.push(new THREE.Vector3(
+                    destinationPacket.xCoordinates,
+                    destinationPacket.yCoordinates,
+                    destinationPacket.zCoordinates
+                ));
+                let line = new THREE.Line(lineGeometry, lineMaterial);
+                scene.add(line);
+            }
+            source = nodes[i].source;
+            sentPackets.push(i);
+        }
+        else {
+            console.log("Error drawing relationships.");
+        }
+    }
+}
+
 function createCanvas(number, time, source, destination, protocol, length) {
     let canvas = createHDCanvas(256, 256);
     let context = canvas.getContext('2d');
@@ -155,6 +196,7 @@ loadJSON(function(response) {
             obj["Length"]
         );
     }
+    drawRelationships();
 });
 
 animate();
