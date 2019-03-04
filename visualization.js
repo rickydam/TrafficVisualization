@@ -144,7 +144,7 @@ function addCube(number, time, source, destination, protocol, length) {
 }
 
 function getCamera() {
-    let fov = 75;
+    let fov = 40;
     let innerWidth = window.innerWidth;
     let innerHeight = window.innerHeight;
     let aspectRatio = innerWidth/innerHeight;
