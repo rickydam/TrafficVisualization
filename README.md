@@ -1,6 +1,5 @@
 # TrafficVisualization
 CybernetIQ's second challenge: Packet traffic visualization using three.js <br>
-**Live preview**: https://rickydam.com/TrafficVisualization
 
 # Screenshot
 ![Screenshot](screenshot.png)
